@@ -1,23 +1,84 @@
-import logo from './logo.svg';
 import './App.css';
+import SearchBar from './components/SearchBar'
+import 'styled-components'
+import React, {useState, useEffect} from 'react';
+import DataTable , {createTheme} from 'react-data-table-component';
 
-function App() {
+const App = () => {
+  //1 - Configurar los hooks
+  const [users, setUsers] = useState( [] )
+
+  //2 - Función para mostrar los datos con fetch
+  const URL = 'https://api.github.com/repos/facebook/react/issues'
+  const showData = async () => {
+    const response = await fetch(URL)
+    const data     = await response.json()
+    console.log(data)
+    setUsers(data)
+  }
+
+  useEffect( ()=>{
+    showData()
+  }, [])
+
+  //3 - Configuramos las columns para Datatable
+  const columns = [
+    {
+      name: 'ID',
+      selector: row => row.id
+    },
+    {
+      name: 'TITULO',
+      selector: row => row.title
+    },
+    {
+      name: 'USUARIO',
+      selector: row => row.user.login
+    },
+
+  ]
+
+  //personalizar temas
+ /*  createTheme('custom', {
+    text: {
+      primary: '#268bd2',
+      secondary: '#2aa198',
+    },
+    background: {
+      default: '#002b36',
+    },
+    context: {
+      background: '#cb4b16',
+      text: '#FFFFFF',
+    },
+    divider: {
+      default: '#073642',
+    },
+    action: {
+      button: 'rgba(0,0,0,.54)',
+      hover: 'rgba(0,0,0,.08)',
+      disabled: 'rgba(0,0,0,.12)',
+    },
+  }, 'dark'); */
+  
+  const MyComponent = () => (
+    <DataTable
+      title="Arnold Movies"
+      columns={columns}
+      theme="solarized"
+    />
+  );
+
+  //4 - Mostramos la data en DataTable
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1>React DataTable</h1>
+     <DataTable 
+      columns={columns}
+      data={users}
+      //theme='custom' //habilitar esta linea y descomentar createTheme()
+      pagination
+     />
     </div>
   );
 }
