@@ -2,6 +2,8 @@ import './App.css';
 import 'styled-components'
 import React, {useState, useEffect} from 'react';
 import DataTable , {createTheme} from 'react-data-table-component';
+import { Link, Router } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom'
 //import SearchBar from './components/SearchBar';
 
 const App = () => {
@@ -35,6 +37,11 @@ const App = () => {
     {
       name: 'TITULO',
       selector: row => row.title
+      //<Router>
+      //<Route path='https://github.com/facebook/react/pull/24117'>
+      //selector: row => row.title
+      //</Route>
+      //</Router>
     },
     {
       name: 'USUARIO',
