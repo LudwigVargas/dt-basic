@@ -1,12 +1,17 @@
 import './App.css';
-import SearchBar from './components/SearchBar'
 import 'styled-components'
 import React, {useState, useEffect} from 'react';
 import DataTable , {createTheme} from 'react-data-table-component';
+//import SearchBar from './components/SearchBar';
 
 const App = () => {
   //1 - Configurar los hooks
   const [users, setUsers] = useState( [] )
+  //const [data, setData] = useState([])
+  //const [searchTerm, setSearchTerm] = useState('')
+
+  //const handleSearchChange = (event) => {
+    //setSearchTerm(event.target.value)
 
   //2 - Función para mostrar los datos con fetch
   const URL = 'https://api.github.com/repos/facebook/react/issues'
@@ -37,29 +42,6 @@ const App = () => {
     },
 
   ]
-
-  //personalizar temas
- /*  createTheme('custom', {
-    text: {
-      primary: '#268bd2',
-      secondary: '#2aa198',
-    },
-    background: {
-      default: '#002b36',
-    },
-    context: {
-      background: '#cb4b16',
-      text: '#FFFFFF',
-    },
-    divider: {
-      default: '#073642',
-    },
-    action: {
-      button: 'rgba(0,0,0,.54)',
-      hover: 'rgba(0,0,0,.08)',
-      disabled: 'rgba(0,0,0,.12)',
-    },
-  }, 'dark'); */
   
   const MyComponent = () => (
     <DataTable
@@ -72,7 +54,8 @@ const App = () => {
   //4 - Mostramos la data en DataTable
   return (
     <div className='App'>
-      <h1>React DataTable</h1>
+
+      <h1>React Issues</h1>
      <DataTable 
       columns={columns}
       data={users}
@@ -81,6 +64,5 @@ const App = () => {
      />
     </div>
   );
-}
-
+}//}
 export default App;
