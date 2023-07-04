@@ -1,27 +1,11 @@
-import { useState } from 'react'
-
-const SearchBar = ({ handleSearch }) => {
-    const [search, setSearch] = useState('')
-  // Estado que almacenará lo que el usuario escriba en el input
-
-
+const SearchBar = ({ handleSearchChange }) => {
   return (
     <div className='search-bar'>
       <input
         type='text'
-        //className='search-input'
-        placeholder='¿Qué deseas buscar?'
-        //name='search'
-        //value={search}
-        onChange={(event) => setSearch(event.target.value)}
+        placeholder='Buscar...'
+        onChange={handleSearchChange}
       />
-
-      <button
-        className='search-button'
-        onClick={() => { handleSearch(search) }}
-      >
-        Buscar
-      </button> 
     </div>
   )
 }
